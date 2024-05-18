@@ -1,3 +1,4 @@
 @echo off
-ll_env\scripts\activate
+title Django Server
+call ll_env\scripts\activate
 python manage.py runserver
