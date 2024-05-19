@@ -1,8 +1,14 @@
-{% extends 'learning_logs/base.html' %} {% block content %} {% if form.errors %}
-<p>你的用户名和密码不匹配。请重试。</p>
-{% endif %}
+{% extends 'learning_logs/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+<h2>登录到你的账号</h2>
+{% endblock page_header %}
+
+{% block content %}
 <form action="{% url 'accounts:login' %}" method="post">
-    {% csrf_token %} {{ form.as_div }}
-    <button name="submit">登录</button>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button button_type="submit" content="登录" %}
 </form>
 {% endblock content %}

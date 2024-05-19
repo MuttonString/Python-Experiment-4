@@ -1,20 +1,29 @@
-{% extends 'learning_logs/base.html' %} {% block content %}
-<h3>主题：{{ topic.text }}</h3>
-<h3>条目：</h3>
-<p>
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+<h2>{{ topic.text }}</h2>
+{% endblock page_header %}
+
+{% block content %}
+<h4>
     <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新条目</a>
-</p>
-<ul>
-    {% for entry in entries %}
-    <li>
-        <p>{{ entry.date_added | date:'Y年 M d日　　H:i' }}</p>
-        <p>{{ entry.text | linebreaks }}</p>
-        <p>
+</h4>
+
+{% for entry in entries %}
+<div class="card mb-3">
+    <!-- 标题 -->
+    <h4 class="card-header">
+        {{ entry.date_added }}
+        <small>
             <a href="{% url 'learning_logs:edit_entry' entry.id %}">编辑条目</a>
-        </p>
-    </li>
-    {% empty %}
-    <li>目前该主题没有任何条目。</li>
-    {% endfor %}
+        </small>
+    </h4>
+
+    <!-- 正文 -->
+    <div class="card-body">{{ entry.text | linebreaks }}</div>
+</div>
+{% empty %}
+<p>该主题目前无任何条目</p>
+{% endfor %}
 </ul>
 {% endblock content %}

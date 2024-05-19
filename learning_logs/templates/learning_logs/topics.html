@@ -1,12 +1,17 @@
-{% extends 'learning_logs/base.html' %} {% block content %}
-<h3>主题</h3>
-<ul>
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+<h2>主题</h2>
+{% endblock page_header %}
+
+{% block content %}
+<ul class="list-group border-bottom pb-2 mb-4">
     {% for topic in topics %}
-    <li>
+    <li class="list-group-item border-0">
         <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a>
     </li>
     {% empty %}
-    <li>目前尚未添加任何主题。</li>
+    <li class="list-group-item border-0">目前尚未添加任何主题</li>
     {% endfor %}
 </ul>
 
