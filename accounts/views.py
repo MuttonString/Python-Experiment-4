@@ -24,3 +24,4 @@ def register(request):
     # 显示空表单或指出表单无效
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
