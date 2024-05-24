@@ -1,3 +1,5 @@
+# @Author  : px
+
 """
 URL configuration for ll_project project.
 
@@ -17,8 +19,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# 定义应用的URL模式
 urlpatterns = [
+    # 显示管理员界面（Django默认提供界面）
     path('admin/', admin.site.urls),
+    # 显示自定义用户认证界面
     path('accounts/', include('accounts.urls')),
+    # 显示学习笔记应用的主页
     path('', include('learning_logs.urls'))
 ]
+
