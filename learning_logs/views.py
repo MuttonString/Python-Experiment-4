@@ -1,3 +1,5 @@
+# @Author  : px
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
@@ -8,19 +10,19 @@ from .forms import TopicForm, EntryForm
 
 
 def check_topic_owner(topic, request):
-    '''核实主题关联到的用户是否为当前登录的用户'''
+    """核实主题关联到的用户是否为当前登录的用户"""
     if topic.owner != request.user:
         raise Http404
 
 
 def index(request):
-    '''学习笔记的主页'''
+    """学习笔记的主页"""
     return render(request, 'learning_logs/index.html')
 
 
 @login_required
 def topics(request):
-    '''显示所有的主题'''
+    """显示所有的主题"""
     topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
@@ -28,7 +30,7 @@ def topics(request):
 
 @login_required
 def topic(request, topic_id):
-    '''显示单个主题及其所有的条目'''
+    """显示单个主题及其所有的条目"""
     topic = Topic.objects.get(id=topic_id)
     check_topic_owner(topic, request)
 
@@ -39,7 +41,7 @@ def topic(request, topic_id):
 
 @login_required
 def new_topic(request):
-    '''添加新主题'''
+    """添加新主题"""
     if request.method != 'POST':
         # 未提交数据：创建一个新表单
         form = TopicForm()
@@ -61,7 +63,7 @@ def new_topic(request):
 def new_entry(request, topic_id):
     '''在特定主题中添加新条目'''
     topic = Topic.objects.get(id=topic_id)
-    # 练习 19.4：保护页面 new_entry　一个用户可以在另一个用户的学习笔记中添加条目，方法是在 URL 中指定属于另一个用户的主题的 ID。为了防范这种攻击，请在保存新条目前，核实它所属的主题归属于当前用户。
+    # 练习 19.4：保护页面 new_entry　一个用户可以在另一个用户的学习笔记中添加条目，方法是在 URL 中指定属于另一个用户的主题的 ID。为了防范这种攻击，请在保存新条前，核实它所属的主题归属于当前用户。
     check_topic_owner(topic, request)
     if request.method != 'POST':
         # 未提交数据：创建一个新表单

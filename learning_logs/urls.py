@@ -1,19 +1,24 @@
-'''定义learning_logs的URL模式'''
+# @Author  : px
+
+"""定义learning_logs的URL模式"""
 from django.urls import path
 from . import views
 
+# 定义应用的名称，名为'learning_logs'
 app_name = 'learning_logs'
+# 定义应用的URL模式
 urlpatterns = [
-    # 主页
+    # 重定向到应用的主页
     path('', views.index, name='index'),
-    # 显示所有主题的页面
+    # 重定向到应用的主题页
     path('topics/', views.topics, name='topics'),
-    # 特定主题的详细页面
+    # 重定向到应用的主题页，主题ID为topic_id
     path('topics/<int:topic_id>/', views.topic, name='topic'),
-    # 用于添加新主题的网页
+    # 重定向到应用的新主题页，创建新主题
     path('new_topic', views.new_topic, name='new_topic'),
-    # 用于添加新条目的页面
+    # 重定向到应用的新条目页，为主题ID为topic_id的主题创建新条目
     path('new_entry/<int:topic_id>/', views.new_entry, name='new_entry'),
-    # 用于编辑条目的页面
+    # 重定向到应用的编辑条目页，编辑条目ID为entry_id的条目
     path('edit_entry/<int:entry_id>', views.edit_entry, name='edit_entry')
 ]
+
