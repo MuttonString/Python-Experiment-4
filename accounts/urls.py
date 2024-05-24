@@ -1,4 +1,5 @@
-'''为应用程序accounts定义URL模式'''
+# @Author  : px
+"""为应用程序accounts定义URL模式"""
 from django.urls import path, include
 from . import views
 
